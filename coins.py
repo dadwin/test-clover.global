@@ -3,7 +3,9 @@ def exchange(coins, s):
     """
         exchange(coins, s)
 
-        Finds minimal combinations of given coins which sum equals to s
+        Finds minimal combinations of given coins which sum equals to s.
+        If a combination exists, it is a tuple so that
+        combo[0]*coins[0] + combo[1]*coins[1] + ... = s
     """
     if len(coins) == 0:
         return
@@ -33,14 +35,14 @@ def exchange(coins, s):
     if len(found) == 0:
         return
 
-    minimum = [found[0]]
+    minimum = {found[0]}
     count = sum(found[0])
 
     for f in found[1:]:
         if sum(f) < count:
-            minimum = [f]
+            minimum = {f}
             count = sum(f)
         elif sum(f) == count:
-            minimum.append(f)
+            minimum.add(f)
 
-    return count, minimum
+    return minimum

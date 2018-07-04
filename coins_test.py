@@ -2,106 +2,71 @@ import unittest
 import coins
 
 
-class Test1(unittest.TestCase):
+class TestExchange(unittest.TestCase):
     def test_no_coins(self):
-        r = coins.exchange([], 1)
-        self.assertTrue(r is None)
+        combinations = coins.exchange([], 1)
+        self.assertTrue(combinations is None)
 
-        r = coins.exchange([], 43)
-        self.assertTrue(r is None)
+        combinations = coins.exchange([], 43)
+        self.assertTrue(combinations is None)
 
     def test_zero_sum(self):
-        r = coins.exchange([1], 0)
-        self.assertTrue(r is None)
+        combinations = coins.exchange([1], 0)
+        self.assertTrue(combinations is None)
 
-        r = coins.exchange([5], 0)
-        self.assertTrue(r is None)
+        combinations = coins.exchange([5], 0)
+        self.assertTrue(combinations is None)
 
     def test_one_coin1(self):
-        r = coins.exchange([1], 1)
-        self.assertTrue(r is not None)
-        self.assertEqual(r[0], 1)
-        combinations = r[1]
+        combinations = coins.exchange([1], 1)
+        self.assertTrue(combinations is not None)
         self.assertEqual(len(combinations), 1)
-
-        actual_combinations = {tuple(m) for m in combinations}
-        expected_combinations = {(1,)}
-        self.assertEqual(actual_combinations, expected_combinations)
+        self.assertEqual(combinations, {(1,)})
 
     def test_one_coin2(self):
-        r = coins.exchange([1], 6)
-        self.assertTrue(r is not None)
-        self.assertEqual(r[0], 6)
-        combinations = r[1]
+        combinations = coins.exchange([1], 6)
+        self.assertTrue(combinations is not None)
         self.assertEqual(len(combinations), 1)
-
-        actual_combinations = {tuple(m) for m in combinations}
-        expected_combinations = {(6,)}
-        self.assertEqual(actual_combinations, expected_combinations)
+        self.assertEqual(combinations, {(6,)})
 
     def test_one_coin3(self):
-        r = coins.exchange([9], 27)
-        self.assertTrue(r is not None)
-        self.assertEqual(r[0], 3)
-        combinations = r[1]
+        combinations = coins.exchange([9], 27)
+        self.assertTrue(combinations is not None)
         self.assertEqual(len(combinations), 1)
-
-        actual_combinations = {tuple(m) for m in combinations}
-        expected_combinations = {(3,)}
-        self.assertEqual(actual_combinations, expected_combinations)
+        self.assertEqual(combinations, {(3,)})
 
     def test_one_coin_none1(self):
-        r = coins.exchange([3], 0)
-        self.assertTrue(r is None)
+        combinations = coins.exchange([3], 0)
+        self.assertTrue(combinations is None)
 
     def test_one_coin_none2(self):
-        r = coins.exchange([3], 2)
-        self.assertTrue(r is None)
+        combinations = coins.exchange([3], 2)
+        self.assertTrue(combinations is None)
 
     def test_one_coin_none3(self):
-        r = coins.exchange([56], 200)
-        self.assertTrue(r is None)
+        combinations = coins.exchange([56], 200)
+        self.assertTrue(combinations is None)
 
     def test1(self):
-        r = coins.exchange([1, 3, 5], 11)
-        self.assertTrue(r is not None)
-        self.assertEqual(r[0], 3)
-        combinations = r[1]
+        combinations = coins.exchange([1, 3, 5], 11)
+        self.assertTrue(combinations is not None)
         self.assertEqual(len(combinations), 2)
-
-        actual_mix = {tuple(m) for m in combinations}
-        expected_mix = {(0, 2, 1), (1, 0, 2)}
-        self.assertEqual(actual_mix, expected_mix)
+        self.assertEqual(combinations, {(0, 2, 1), (1, 0, 2)})
 
     def test2(self):
-        r = coins.exchange([2, 3, 5], 11)
-        self.assertTrue(r is not None)
-        self.assertEqual(r[0], 3)
-        combinations = r[1]
+        combinations = coins.exchange([2, 3, 5], 11)
+        self.assertTrue(combinations is not None)
         self.assertEqual(len(combinations), 1)
-
-        actual_mix = {tuple(m) for m in combinations}
-        expected_mix = {(0, 2, 1)}
-        self.assertEqual(actual_mix, expected_mix)
+        self.assertEqual(combinations, {(0, 2, 1)})
 
     def test3(self):
-        r = coins.exchange([4, 5], 8)
-        self.assertTrue(r is not None)
-        self.assertEqual(r[0], 2)
-        combinations = r[1]
+        combinations = coins.exchange([4, 5], 8)
+        self.assertTrue(combinations is not None)
         self.assertEqual(len(combinations), 1)
-
-        actual_mix = {tuple(m) for m in combinations}
-        expected_mix = {(2, 0)}
-        self.assertEqual(actual_mix, expected_mix)
+        self.assertEqual(combinations, {(2, 0)})
 
     def test4(self):
-        r = coins.exchange([4, 5], 10)
-        self.assertTrue(r is not None)
-        self.assertEqual(r[0], 2)
-        combinations = r[1]
+        combinations = coins.exchange([4, 5], 10)
+        self.assertTrue(combinations is not None)
         self.assertEqual(len(combinations), 1)
-
-        actual_mix = {tuple(m) for m in combinations}
-        expected_mix = {(0, 2)}
-        self.assertEqual(actual_mix, expected_mix)
+        self.assertEqual(combinations, {(0, 2)})
