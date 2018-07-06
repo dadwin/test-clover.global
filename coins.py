@@ -4,13 +4,20 @@ def exchange(coins, s):
         exchange(coins, s)
 
         Finds minimal combinations of given coins which sum equals to s.
+        If no combinations exist, returns None, otherwise a list of combinations.
+        Combinations is a tuple with length being equal to len(coins),
+        its first element is a number of coins with maximal value,
+        the last element is a number of coins with minimal value, and all other in between:
         If a combination exists, it is a tuple so that
-        combo[0]*coins[0] + combo[1]*coins[1] + ... = s
+        combo[0]*sorted_coins[0] + combo[1]*sorted_coins[1] + ... = s,
+        where sorted_coins is coins sorted in descending order.
     """
     if len(coins) == 0:
         return
     if s == 0:
         return
+
+    coins.sort(reverse=True)
 
     max_combo = [int(s / c) for c in coins]
     combo = [0] * len(max_combo)
@@ -18,7 +25,6 @@ def exchange(coins, s):
     found = []
     while combo != max_combo:
         guess = sum(map(lambda x, y: x * y, combo, coins))
-        print(combo)
         if guess == s:
             found.append(tuple(combo))
 

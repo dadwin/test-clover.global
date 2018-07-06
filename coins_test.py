@@ -1,5 +1,5 @@
 import unittest
-import coins
+import coins2 as coins
 
 
 class TestExchange(unittest.TestCase):
@@ -48,25 +48,41 @@ class TestExchange(unittest.TestCase):
         self.assertTrue(combinations is None)
 
     def test1(self):
-        combinations = coins.exchange([1, 3, 5], 11)
+        combinations = coins.exchange([5, 3, 1], 11)
         self.assertTrue(combinations is not None)
         self.assertEqual(len(combinations), 2)
-        self.assertEqual(combinations, {(0, 2, 1), (1, 0, 2)})
+        self.assertEqual(combinations, {(1, 2, 0), (2, 0, 1)})
 
     def test2(self):
-        combinations = coins.exchange([2, 3, 5], 11)
+        combinations = coins.exchange([5, 3, 2], 11)
         self.assertTrue(combinations is not None)
         self.assertEqual(len(combinations), 1)
-        self.assertEqual(combinations, {(0, 2, 1)})
+        self.assertEqual(combinations, {(1, 2, 0)})
 
     def test3(self):
-        combinations = coins.exchange([4, 5], 8)
+        combinations = coins.exchange([5, 4], 8)
+        self.assertTrue(combinations is not None)
+        self.assertEqual(len(combinations), 1)
+        self.assertEqual(combinations, {(0, 2)})
+
+    def test4(self):
+        combinations = coins.exchange([5, 4], 10)
         self.assertTrue(combinations is not None)
         self.assertEqual(len(combinations), 1)
         self.assertEqual(combinations, {(2, 0)})
 
-    def test4(self):
-        combinations = coins.exchange([4, 5], 10)
+    def test5(self):
+        combinations = coins.exchange([9, 5, 4], 11)
+        self.assertTrue(combinations is None)
+
+    def test6(self):
+        combinations = coins.exchange([25, 17, 4, 3], 111)
         self.assertTrue(combinations is not None)
         self.assertEqual(len(combinations), 1)
-        self.assertEqual(combinations, {(0, 2)})
+        self.assertEqual(combinations, {(4, 0, 2, 1)})
+
+    def test7(self):
+        combinations = coins.exchange([5, 3, 2], 10002)
+        self.assertTrue(combinations is not None)
+        self.assertEqual(len(combinations), 1)
+        self.assertEqual(combinations, {(2000, 0, 1)})
